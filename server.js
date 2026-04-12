@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 3300;
 const TE_COCOA = "https://tradingeconomics.com/commodity/cocoa";
 
 let cache = { payload: null, at: 0 };
-const CACHE_MS = parseInt(process.env.COCOA_CACHE_MS || "45000", 10);
+// const CACHE_MS = parseInt(process.env.COCOA_CACHE_MS || "45000", 10);
+const CACHE_MS = 120000; // 2 minutes
 
 // Pre-fetch data on server startup
 async function initializeChartData() {
@@ -36,6 +37,7 @@ function syntheticSeries(months = 14) {
   }
   return pts;
 }
+
 
 function fallbackPayload(errMsg) {
   return {
@@ -66,10 +68,18 @@ function fallbackPayload(errMsg) {
 }
 
 async function scrapeTradingEconomics() {
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
-  });
+ const browser = await puppeteer.launch({
+  headless: "new",
+  args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--no-first-run",
+    "--no-zygote",
+    "--single-process"
+  ],
+});
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: 1400, height: 900 });
@@ -81,7 +91,13 @@ async function scrapeTradingEconomics() {
       timeout: 90000,
     });
     await page.waitForSelector("body", { timeout: 15000 });
-    await new Promise((r) => setTimeout(r, 4000));
+
+    await page.waitForFunction(() => {
+  return window.Highcharts && window.Highcharts.charts?.length > 0;
+}, { timeout: 20000 });
+
+await new Promise((r) => setTimeout(r, 3000));
+    // await new Promise((r) => setTimeout(r, 4000));
 
     const extracted = await page.evaluate(() => {
       const out = {
