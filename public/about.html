@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | OGBO AND SONS NIGERIA LIMITED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --cocoa-brown: #3D2314;
+        --cocoa-dark: #1A0F0A;
+        --cocoa-light: #5C3D2E;
+        --gold: #D4A84B;
+        --gold-light: #E8C068;
+        --cream: #F5F0E8;
+        --white: #FFFFFF;
+        --gray: #8B7355;
+        --text-muted: #C4B5A0;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--cocoa-dark);
+        color: var(--cream);
+        line-height: 1.6;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: 'Playfair Display', serif;
+      }
+
+      body { padding-top: 80px; }
+
+      /* Main Content */
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        padding-top: 0;
+      }
+
+      .page-header {
+      /* margin-top: 80px; */
+      background: linear-gradient(135deg, var(--cocoa-brown) 0%, var(--cocoa-dark) 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    .page-header h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .page-header p { color: var(--cream); opacity: 0.9; font-size: 1.1rem; line-height: 1.6; }
+    
+      .page-title {
+        font-size: 2.5rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        font-family: 'Playfair Display', serif;
+      }
+
+      .page-intro {
+        color: var(--text-muted);
+        max-width: 720px;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      /* Registration Box */
+      .registration-box {
+        background: rgba(212, 168, 75, 0.1);
+        border: 2px solid var(--gold);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+      }
+
+      .registration-box h2 {
+        color: var(--gold);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        border: none;
+      }
+
+      .reg-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .reg-item dt {
+        color: var(--gray);
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+        font-weight: 500;
+      }
+
+      .reg-item dd {
+        color: var(--cream);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      /* Heritage Section */
+      .heritage-section {
+        margin-bottom: 2rem;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+      background: linear-gradient(145deg, var(--cocoa-brown), var(--cocoa-dark));
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .heritage-section h2 {
+        font-size: 1.8rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        
+      }
+
+      .heritage-text {
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      .heritage-text strong {
+        color: var(--gold);
+      }
+
+      /* Feature Cards */
+      .feature-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .feature-card {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(212, 168, 75, 0.3);
+        transition: transform 0.3s, border-color 0.3s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+      }
+
+      .feature-card .img-ph img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .feature-card .body {
+        padding: 1.5rem;
+      }
+
+      .feature-card h3 {
+        color: var(--gold);
+        margin-bottom: 0.75rem;
+        font-size: 1.3rem;
+      }
+
+      .feature-card p {
+        color: var(--cream);
+        opacity: 0.85;
+        font-size: 0.95rem;
+      }
+
+      /* Mission & Values Section */
+      .mission-section {
+        margin: 2rem 0;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+      background: linear-gradient(145deg, var(--cocoa-brown), var(--cocoa-dark));
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .mission-section h2 {
+        font-size: 1.8rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+
+      .mission-intro {
+        color: var(--text-muted);
+        max-width: 720px;
+        margin-bottom: 2rem;
+      }
+
+      .mission-values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .mission-value-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        min-height: 220px;
+        border: 1px solid rgba(212, 168, 75, 0.35);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        cursor: default;
+      }
+
+      .mission-value-card:hover,
+      .mission-value-card:focus-within {
+        transform: translateY(-4px);
+        border-color: var(--gold);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+      }
+
+      .mission-value-card:focus {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+      }
+
+      .mission-value-card img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.55s ease;
+      }
+
+      .mission-value-card:hover img,
+      .mission-value-card:focus-within img {
+        transform: scale(1.06);
+      }
+
+      .mission-value-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.25rem 1.35rem;
+        background: linear-gradient(
+          to top,
+          rgba(26, 15, 10, 0.92) 0%,
+          rgba(10, 3, 0, 0.45) 42%,
+          transparent 72%
+        );
+        transition: background 0.4s ease;
+      }
+
+      .mission-value-card:hover .mission-value-overlay,
+      .mission-value-card:focus-within .mission-value-overlay {
+        justify-content: center;
+        background: rgba(26, 15, 10, 0.88);
+      }
+
+      .mission-value-overlay h3 {
+        color: var(--gold);
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        margin: 0 0 0.35rem;
+        line-height: 1.25;
+        text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+      }
+
+      .mission-value-overlay p {
+        color: var(--cream);
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin: 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
+      }
+
+      .mission-value-card:hover .mission-value-overlay p,
+      .mission-value-card:focus-within .mission-value-overlay p {
+        max-height: 14rem;
+        opacity: 0.95;
+        margin-top: 0.65rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .mission-value-card,
+        .mission-value-card img,
+        .mission-value-overlay,
+        .mission-value-overlay p {
+          transition: none;
+        }
+
+        .mission-value-card:hover,
+        .mission-value-card:focus-within {
+          transform: none;
+        }
+
+        .mission-value-card:hover img,
+        .mission-value-card:focus-within img {
+          transform: none;
+        }
+      }
+
+      /* Directors Section */
+      .directors-section {
+        margin-top: 2rem;
+      }
+
+      .directors-section h2 {
+        font-size: 1.8rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+
+      .directors-banner {
+        margin: 1.5rem 0;
+        background: linear-gradient(135deg, var(--cocoa-brown), var(--cocoa-light));
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        border: 1px solid rgba(212, 168, 75, 0.3);
+      }
+
+      .directors-banner img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .director-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .director-card {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(212, 168, 75, 0.3);
+        transition: transform 0.3s, border-color 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .director-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+      }
+
+      .director-photo {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--cocoa-brown), var(--cocoa-light));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: var(--gold);
+        font-family: 'Playfair Display', serif;
+        border: 2px solid var(--gold);
+        object-fit: cover;
+      }
+
+      .director-card .name {
+        color: var(--cream);
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .director-card .role {
+        color: var(--gold);
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      /* Footer - Enhanced from first design */
+      .footer {
+        background: var(--cocoa-dark);
+        border-top: 2px solid var(--gold);
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        text-align: left;
+      }
+
+      .footer-section h4 {
+        color: var(--gold);
+        margin-bottom: 1rem;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+      }
+
+      .footer-section p,
+      .footer-section a {
+        color: var(--cream);
+        font-size: 0.9rem;
+        text-decoration: none;
+        line-height: 1.8;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section a:hover {
+        color: var(--gold);
+      }
+
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 2rem auto 0;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(212, 168, 75, 0.3);
+        text-align: center;
+        color: var(--gray);
+        font-size: 0.85rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-toggle {
+          display: block;
+        }
+
+        .nav-list {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          width: 100%;
+          background: var(--cocoa-dark);
+          flex-direction: column;
+          padding: 1rem;
+          gap: 0;
+          transition: left 0.3s ease;
+          border-bottom: 2px solid var(--gold);
+        }
+
+        .nav-list.active {
+          left: 0;
+        }
+
+        .nav-list a {
+          display: block;
+          padding: 1rem;
+          border-bottom: 1px solid rgba(212, 168, 75, 0.2);
+        }
+
+        .page-title {
+          font-size: 1.8rem;
+        }
+
+        .reg-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mission-values-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .director-grid {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 1.5rem;
+        }
+
+        .footer-section h4 {
+          margin-bottom: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body data-page="about">
+    <div id="navbar-placeholder"></div>
+
+    <section class="page-header">
+      <h1 class="">About Us</h1>
+      <p class="">
+        From our registered office in Umuahia, we connect Nigerian cocoa to disciplined global markets —
+        combining heritage, certifications, and transparent governance under a six-director board.
+      </p>
+    </section>
+
+    <main>
+      <div class="registration-box">
+        <h2>Company Registration Details</h2>
+        <dl class="reg-grid">
+          <div class="reg-item">
+            <dt>Company name</dt>
+            <dd>OGBO AND SONS NIGERIA LIMITED</dd>
+          </div>
+          <div class="reg-item">
+            <dt>Registration number</dt>
+            <dd>RC 289933</dd>
+          </div>
+          <div class="reg-item">
+            <dt>Date of incorporation</dt>
+            <dd>04 March 1996</dd>
+          </div>
+          <div class="reg-item">
+            <dt>Company type</dt>
+            <dd>Private Unlimited Company</dd>
+          </div>
+          <div class="reg-item">
+            <dt>Registered office</dt>
+            <dd>No. 32, Igbere Street, Umuahia, Abia State, Nigeria</dd>
+          </div>
+          <div class="reg-item">
+            <dt>Years active</dt>
+            <dd>29+ years (1996–2026)</dd>
+          </div>
+        </dl>
+      </div>
+
+      <section class="heritage-section">
+        <h2>Our Heritage</h2>
+        <p class="heritage-text">
+          <strong>OGBO AND SONS NIGERIA LIMITED</strong> was officially established on 
+          <strong>04 March 1996</strong> in Umuahia, Abia State, Nigeria. What began as a small-scale 
+          cocoa trading operation has evolved into one of Nigeria's most respected and trusted cocoa 
+          export companies.
+        </p>
+        <p class="heritage-text">
+          For nearly three decades, we have remained deeply rooted in Nigeria's cocoa belt, building 
+          strong relationships with farmers and sourcing the finest <strong>Grade 1 cocoa beans</strong> 
+          from the country's richest agricultural regions. Our journey from regional sourcing to structured 
+          export programs reflects our commitment to meeting international standards, certifications, and 
+          the ever-evolving expectations of global buyers.
+        </p>
+        <p class="heritage-text">
+          From our headquarters in Umuahia, we have developed a reputation for reliability, premium quality, 
+          and professional excellence. Today, we proudly serve clients across <strong>more than 25 countries</strong>, 
+          delivering cocoa products that consistently meet and exceed global benchmarks.
+        </p>
+        <p class="heritage-text">
+          At the core of our operations is a steadfast commitment to sustainability and ethical practices. 
+          We invest in farmer training, fair financing, and post-harvest best practices to protect both 
+          yields and livelihoods. Through strict quality control—covering fermentation, moisture levels, 
+          and traceability—we ensure our cocoa meets the demands of discerning chocolate manufacturers 
+          and industrial buyers worldwide.
+        </p>
+      </section>
+
+      <div class="feature-cards">
+        <article class="feature-card">
+          <div class="img-ph">
+            <img src="/images/cocoa-farm.png" alt="Sustainable cocoa farming" onerror="this.src='https://placehold.co/400x250/3D2314/D4A84B?text=Sustainable+Farming'"/>
+          </div>
+          <div class="body">
+            <h3>Sustainable Farming</h3>
+            <p>
+              Training, fair financing, and post-harvest best practices that protect yields and
+              livelihoods in producing communities.
+            </p>
+          </div>
+        </article>
+        <article class="feature-card">
+          <div class="img-ph">
+            <img src="/images/cocoa-hero.png" alt="Premium cocoa quality" onerror="this.src='https://placehold.co/400x250/3D2314/D4A84B?text=Premium+Quality'"/>
+          </div>
+          <div class="body">
+            <h3>Premium Quality</h3>
+            <p>
+              Grade 1 export-ready beans, moisture and fermentation controls, and traceability suited
+              to discerning chocolate and industrial buyers.
+            </p>
+          </div>
+        </article>
+        <article class="feature-card">
+          <div class="img-ph">
+            <img src="/images/cocoa-warehouse.png" alt="Global export logistics" onerror="this.src='https://placehold.co/400x250/3D2314/D4A84B?text=Global+Export'"/>
+          </div>
+          <div class="body">
+            <h3>Global Export</h3>
+            <p>
+              Documentation, logistics, and market intelligence spanning 25+ countries from our
+              Umuahia headquarters and partner corridors.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Mission & Values Section -->
+      <section class="mission-section">
+        <h2>Our Mission & Values</h2>
+        <hr style="border: 1px solid rgba(234, 162, 8, 0.3); margin-bottom: 1rem;">
+        <p class="mission-intro">
+          <strong>Our Mission:</strong> To deliver reliable cocoa supply and honest market access for
+          Nigerian farmers and international partners through integrity, transparency, and continuous improvement.
+        </p>
+        
+        <div class="mission-values-grid">
+          <article class="mission-value-card" tabindex="0">
+            <img
+              src="/images/mission-quality.png"
+              alt="Premium cocoa beans inspected for export quality"
+              width="800"
+              height="600"
+              onerror="this.src='https://placehold.co/800x600/3D2314/D4A84B?text=Quality+Excellence'"
+            />
+            <div class="mission-value-overlay">
+              <h3>Quality Excellence</h3>
+              <p>We source and export only the highest quality Grade 1 cocoa beans, ensuring consistency and excellence in every shipment. Integrity in grading is our cornerstone.</p>
+            </div>
+          </article>
+          <article class="mission-value-card" tabindex="0">
+            <img
+              src="/images/mission-sustainable.png"
+              alt="Cocoa farm and shade trees in the growing region"
+              width="800"
+              height="600"
+              onerror="this.src='https://placehold.co/800x600/3D2314/D4A84B?text=Sustainable+Practices'"
+            />
+            <div class="mission-value-overlay">
+              <h3>Sustainable Practices</h3>
+              <p>We are committed to environmentally sustainable farming methods and supporting the communities where we operate, protecting yields for future generations.</p>
+            </div>
+          </article>
+          <article class="mission-value-card" tabindex="0">
+            <img
+              src="/images/mission-farmers.png"
+              alt="Cocoa farmers at work in the community"
+              width="800"
+              height="600"
+              onerror="this.src='https://placehold.co/800x600/3D2314/D4A84B?text=Farmer+Empowerment'"
+            />
+            <div class="mission-value-overlay">
+              <h3>Farmer Empowerment</h3>
+              <p>We provide fair trade financing and support to farmers, ensuring they receive equitable compensation for their hard work and dedication.</p>
+            </div>
+          </article>
+          <article class="mission-value-card" tabindex="0">
+            <img
+              src="/images/hero.png"
+              alt="Cocoa handling and logistics meeting export standards"
+              width="800"
+              height="600"
+              onerror="this.src='https://placehold.co/800x600/3D2314/D4A84B?text=Global+Standards'"
+            />
+            <div class="mission-value-overlay">
+              <h3>Global Standards</h3>
+              <p>Our operations meet international quality standards with continuous improvement in food safety and certification readiness for global markets.</p>
+            </div>
+          </article>
+          <article class="mission-value-card" tabindex="0">
+            <img
+              src="/images/mission-partnership.png"
+              alt="Business partners in discussion"
+              width="800"
+              height="600"
+              onerror="this.src='https://placehold.co/800x600/3D2314/D4A84B?text=Customer+Partnership'"
+            />
+            <div class="mission-value-overlay">
+              <h3>Customer Partnership</h3>
+              <p>We build long-term relationships with our clients based on trust, reliability, transparency in contracts, and consistent delivery of premium products.</p>
+            </div>
+          </article>
+          <article class="mission-value-card" tabindex="0">
+            <img
+              src="/images/mission-leadership.png"
+              alt="Global trade and cocoa industry context"
+              width="800"
+              height="600"
+              onerror="this.src='https://placehold.co/800x600/3D2314/D4A84B?text=Industry+Leadership'"
+            />
+            <div class="mission-value-overlay">
+              <h3>Industry Leadership</h3>
+              <p>We continuously invest in market intelligence and innovation to stay ahead in the global cocoa trade, respecting communities at every step.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="directors-section">
+        <h2 class="page-title" style="font-size: 1.5rem">Board of directors</h2>
+        <!-- <p style="color: var(--text-muted); margin-bottom: 1rem; max-width: 720px">
+          Six directors guide strategy, compliance, and export operations. Portraits below are
+          illustrated placeholders — official correspondence uses the registered company address.
+        </p> -->
+        <div class="directors-banner">
+          <img src="/images/directors-team.png" alt="Abstract leadership team illustration" width="1200" height="280" />
+        </div>
+        <div class="director-grid">
+          <article class="director-card">
+            <img class="director-photo" src="/images/director-01.png" alt="" width="64" height="64" />
+            <div>
+              <div class="name">Ogbonnaya J. Chijioke</div>
+              <div class="role">Director</div>
+            </div>
+          </article>
+          <article class="director-card">
+            <img class="director-photo" src="/images/director-02.png" alt="" width="64" height="64" />
+            <div>
+              <div class="name">Ogbonnaya Chijioke</div>
+              <div class="role">Director</div>
+            </div>
+          </article>
+          <article class="director-card">
+            <img class="director-photo" src="/images/director-03.png" alt="" width="64" height="64" />
+            <div>
+              <div class="name">Ogbonnaya Ikemba</div>
+              <div class="role">Director</div>
+            </div>
+          </article>
+          <article class="director-card">
+            <img class="director-photo" src="/images/director-04.png" alt="" width="64" height="64" />
+            <div>
+              <div class="name">Ogbonnaya Chinedu</div>
+              <div class="role">Director</div>
+            </div>
+          </article>
+          <article class="director-card">
+            <img class="director-photo" src="/images/director-05.png" alt="" width="64" height="64" />
+            <div>
+              <div class="name">Ogbonnaya Nnennaya J.</div>
+              <div class="role">Director</div>
+            </div>
+          </article>
+          <article class="director-card">
+            <img class="director-photo" src="/images/director-06.png" alt="" width="64" height="64" />
+            <div>
+              <div class="name">Ogbonnaya Urenna</div>
+              <div class="role">Director</div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer from first design -->
+    <div id="site-footer"></div>
+
+    <script src="/js/components.js"></script>
+  </body>
+</html>

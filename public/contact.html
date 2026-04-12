@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | OGBO AND SONS NIGERIA LIMITED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/navbar.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cocoa-brown: #3D2314;
+      --cocoa-dark: #1A0F0A;
+      --cocoa-light: #5C3D2E;
+      --gold: #D4A84B;
+      --gold-light: #E8C068;
+      --cream: #F5F0E8;
+      --white: #FFFFFF;
+      --gray: #8B7355;
+      --green: #2E7D32;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cocoa-dark);
+      color: var(--cream);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    body { padding-top: 80px; }
+
+    .page-header {
+      margin-top: 80px;
+      background: linear-gradient(135deg, var(--cocoa-brown) 0%, var(--cocoa-dark) 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    .page-header h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .page-header p { color: var(--cream); opacity: 0.9; }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .info-card {
+      background: linear-gradient(145deg, var(--cocoa-brown), var(--cocoa-dark));
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .info-card h3 {
+      color: var(--gold);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(212, 168, 75, 0.15);
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(212, 168, 75, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-details { flex: 1; }
+    .contact-label { color: var(--gray); font-size: 0.85rem; }
+    .contact-value { color: var(--cream); font-weight: 500; }
+    .contact-value a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .contact-value a:hover { color: var(--gold); }
+
+    .phone-numbers .contact-item a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .phone-numbers .contact-item a:hover { color: var(--gold); }
+
+    .email-addresses .contact-item a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .email-addresses .contact-item a:hover { color: var(--gold); }
+
+    .offices-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .office-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+    }
+    .office-name { color: var(--gold); font-weight: 600; margin-bottom: 0.5rem; }
+    .office-address { color: var(--cream); font-size: 0.9rem; opacity: 0.9; }
+
+    .contact-form-container {
+      background: linear-gradient(145deg, var(--cocoa-brown), var(--cocoa-dark));
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+    }
+    .contact-form-container h2 {
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      color: var(--cream);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .form-group label .required {
+      color: var(--gold);
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(212, 168, 75, 0.3);
+      border-radius: 8px;
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 168, 75, 0.2);
+    }
+    .form-control::placeholder {
+      color: var(--gray);
+    }
+    select.form-control {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4A84B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+    select.form-control option {
+      background: var(--cocoa-dark);
+      color: var(--cream);
+    }
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--cocoa-dark);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(212, 168, 75, 0.3);
+    }
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-message {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: none;
+      text-align: center;
+    }
+    .form-message.success {
+      display: block;
+      background: rgba(46, 125, 50, 0.2);
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+    .form-message.error {
+      display: block;
+      background: rgba(198, 40, 40, 0.2);
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+
+    .map-placeholder {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1rem;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+    }
+    .map-placeholder p { color: var(--gray); }
+
+    .footer {
+      background: var(--cocoa-dark);
+      border-top: 2px solid var(--gold);
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    .footer-section h4 { color: var(--gold); margin-bottom: 1rem; font-family: 'Playfair Display', serif; }
+    .footer-section p, .footer-section a { color: var(--cream); font-size: 0.9rem; text-decoration: none; }
+    .footer-section a:hover { color: var(--gold); }
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(212, 168, 75, 0.3);
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 1024px) {
+      .main-content { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--cocoa-dark);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0;
+        transform: translateY(-150%);
+        transition: transform 0.3s;
+        border-bottom: 2px solid var(--gold);
+      }
+      .nav-links.active { transform: translateY(0); }
+      .nav-links a { padding: 1rem; border-bottom: 1px solid rgba(212, 168, 75, 0.2); }
+      .page-header h1 { font-size: 1.8rem; }
+      .offices-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <section class="page-header">
+    <h1>Contact Us</h1>
+    <p>OGBO AND SONS NIGERIA LIMITED | Get in Touch</p>
+  </section>
+
+  <main class="main-content">
+    <div class="contact-info">
+      <div class="info-card">
+        <h3>📞 Phone Numbers</h3>
+        <div class="phone-numbers">
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-details">
+              <div class="contact-label">Main Office</div>
+              <div class="contact-value"><a href="tel:+2348012345678">+234 80..........</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-details">
+              <div class="contact-label">Mobile / WhatsApp</div>
+              <div class="contact-value"><a href="https://wa.me/234807031313872" rel="noopener noreferrer">WhatsApp</a></div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>✉️ Email Addresses</h3>
+        <div class="email-addresses">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-details">
+              <div class="contact-label">General Inquiries</div>
+              <div class="contact-value"><a href="mailto:info@ogbosonng.com">info@ogbosonng.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📤</div>
+            <div class="contact-details">
+              <div class="contact-label">Export Inquiries</div>
+              <div class="contact-value"><a href="mailto:exports@ogbosonng.com">exports@ogbosonng.com</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>📍 Office Locations</h3>
+        <div class="offices-grid">
+          <div class="office-card">
+            <div class="office-name">Lagos HQ</div>
+            <div class="office-address">
+              No. 32, Igbere Street<br>
+              Umuahia, Abia State<br>
+              Nigeria
+            </div>
+          </div>
+          <div class="office-card">
+            <div class="office-name">Calabar Processing Plant</div>
+            <div class="office-address">
+              Calabar, Cross River State<br>
+              Nigeria
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>🕐 Business Hours</h3>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-details">
+            <div class="contact-label">Monday - Friday</div>
+            <div class="contact-value">8:00 AM - 6:00 PM (WAT)</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-details">
+            <div class="contact-label">Saturday</div>
+            <div class="contact-value">9:00 AM - 2:00 PM (WAT)</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🚫</div>
+          <div class="contact-details">
+            <div class="contact-label">Sunday</div>
+            <div class="contact-value">Closed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-container">
+      <h2>Send Us a Message</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-control" placeholder="+234 ...">
+        </div>
+
+        <div class="form-group">
+          <label for="company">Company Name</label>
+          <input type="text" id="company" name="company" class="form-control" placeholder="Enter your company name">
+        </div>
+
+        <div class="form-group">
+          <label for="inquiryType">Inquiry Type <span class="required">*</span></label>
+          <select id="inquiryType" name="inquiryType" class="form-control" required>
+            <option value="">Select an inquiry type</option>
+            <option value="cocoa-supply">Cocoa Bean Supply</option>
+            <option value="export-services">Export Services</option>
+            <option value="certification">Certification Services</option>
+            <option value="partnership">Business Partnership</option>
+            <option value="pricing">Pricing Information</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message <span class="required">*</span></label>
+          <textarea id="message" name="message" class="form-control" placeholder="How can we help you?" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+
+        <div class="form-message" id="formMessage"></div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>OGBO AND SONS NIGERIA LIMITED</h4>
+        <p>RC 289933</p>
+        <p>Private Unlimited Company</p>
+        <p>Incorporated: 04 March 1996</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>📞 Main: <a href="tel:+2348012345678">+234 80 1234 5678</a></p>
+        <p>📱 WhatsApp: <a href="tel:+2348098765432">+234 80 9876 5432</a></p>
+        <p>✉️ <a href="mailto:info@ogbosonng.com">info@ogbosonng.com</a></p>
+        <p>✉️ <a href="mailto:exports@ogbosonng.com">exports@ogbosonng.com</a></p>
+      </div>
+      <div class="footer-section">
+        <h4>Office Location</h4>
+        <p>No. 32, Igbere Street</p>
+        <p>Umuahia, Abia State</p>
+        <p>Nigeria</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <p><a href="/">Dashboard</a></p>
+        <p><a href="/about">About Us</a></p>
+        <p><a href="/services">Services</a></p>
+        <p><a href="/contact">Contact</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 OGBO AND SONS NIGERIA LIMITED. All Rights Reserved. | RC 289933</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/components.js"></script>
+</body>
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      formMessage.className = 'form-message';
+      formMessage.style.display = 'none';
+
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        company: document.getElementById('company').value,
+        inquiryType: document.getElementById('inquiryType').value,
+        message: document.getElementById('message').value
+      };
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          formMessage.textContent = result.message;
+          formMessage.className = 'form-message success';
+          document.getElementById('contactForm').reset();
+        } else {
+          formMessage.textContent = result.message || 'An error occurred. Please try again.';
+          formMessage.className = 'form-message error';
+        }
+      } catch (error) {
+        formMessage.textContent = 'Network error. Please check your connection and try again.';
+        formMessage.className = 'form-message error';
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message 2';
+    });
+  </script>
+</body>
+</html>

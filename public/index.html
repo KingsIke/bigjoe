@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | OGBO AND SONS NIGERIA LIMITED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+  </head>
+  <body data-page="dashboard">
+    <!-- Page loader -->
+    <div class="page-loader" id="pageLoader">
+      <div class="loader-logo">OGBO AND SONS NIGERIA LIMITED</div>
+      <div class="loader-ring"></div>
+    </div>
+
+    <div id="navbar-placeholder"></div>
+
+    <main>
+      <section class="hero ">
+        <div class="hero-copy">
+          <h1>Global cocoa intelligence, rooted in Abia State</h1>
+          <p class="lead">
+            Live benchmark pricing from Trading Economics, export-ready Grade 1 beans, and
+            market coverage across 25+ countries — <strong>RC 289933</strong>, six directors,
+            <strong>29+ years</strong> since incorporation.
+          </p>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/cocoa-hero.png" alt="Premium cocoa beans" width="800" height="500" />
+          <span class="badge-big-joe">BIG JOE</span>
+        </div>
+      </section>
+
+      <div class="grid-dashboard">
+        <div class="card span-6">
+          <h2>Live cocoa price</h2>
+          <div class="price-display">
+            <span class="skeleton skeleton-price" id="sk-price"></span>
+            <span class="price-main" id="live-price">—</span>
+            <span class="price-unit" id="live-unit">USD/MT</span>
+            <span class="change-pill up" id="live-change"
+              ><span class="live-dot" aria-hidden="true"></span>—</span
+            >
+          </div>
+          <p class="source-pill" id="te-headline" style="margin-top: 0.75rem; color: var(--text-muted); font-size: 0.88rem"></p>
+          <div class="meta-row" id="meta-row">
+            <div class="meta-item">
+              <div class="label">Previous close</div>
+              <div class="value skeleton skeleton-meta" id="sk-prev"></div>
+            </div>
+            <div class="meta-item">
+              <div class="label">30-day change</div>
+              <div class="value skeleton skeleton-meta" id="sk-month"></div>
+            </div>
+            <div class="meta-item">
+              <div class="label">Year high</div>
+              <div class="value skeleton skeleton-meta" id="sk-high"></div>
+            </div>
+            <div class="meta-item">
+              <div class="label">Year low</div>
+              <div class="value skeleton skeleton-meta" id="sk-low"></div>
+            </div>
+            <div class="meta-item">
+              <div class="label">EOQ forecast</div>
+              <div class="value skeleton skeleton-meta" id="sk-fq"></div>
+            </div>
+            <div class="meta-item">
+              <div class="label">12-mo forecast</div>
+              <div class="value skeleton skeleton-meta" id="sk-12m"></div>
+            </div>
+          </div>
+          <p class="source-pill">Source: <span id="data-source">Loading…</span></p>
+        </div>
+
+        <div class="card span-6">
+          <h2>Company snapshot</h2>
+          <div class="stats-grid">
+            <div class="stat-block">
+              <div class="num">40+</div>
+              <div class="lbl">Years active (1980's – 2026)</div>
+            </div>
+            <div class="stat-block">
+              <div class="num">50K+</div>
+              <div class="lbl">MT exported (cumulative)</div>
+            </div>
+            <div class="stat-block">
+              <div class="num">25+</div>
+              <div class="lbl">Countries served</div>
+            </div>
+            <div class="stat-block">
+              <div class="num">RC 289933</div>
+              <div class="lbl">Corporate registration</div>
+            </div>
+            <div class="stat-block">
+              <div class="num">6</div>
+              <div class="lbl">Directors</div>
+            </div>
+            <div class="stat-block">
+              <div class="num">Umuahia</div>
+              <div class="lbl">Registered office</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card span-12 chart-card-primary">
+          <div class="chart-card-head">
+            <div>
+              <h2 style="margin-bottom: 0.35rem">Cocoa (USD/T) — live series</h2>
+              <p class="chart-card-sub">
+                <span id="chart-live-strip" class="chart-live-strip">Loading…</span>
+                <span class="chart-card-sub-muted">
+                  — Same price series as Trading Economics; their embed iframe is blocked on most
+                  external sites (blank grey box).
+                </span>
+              </p>
+            </div>
+            <div class="chart-card-actions">
+              <a
+                class="btn-te-out"
+                href="https://tradingeconomics.com/commodity/cocoa"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open Trading Economics chart</a
+              >
+            </div>
+          </div>
+          <div class="chart-period-hint" aria-hidden="true">~1Y view · from scraped history</div>
+          <div class="chart-wrap chart-wrap-main is-loading" id="chartWrap">
+            <canvas id="cocoa-chart-main" aria-label="Cocoa USD per tonne line chart"></canvas>
+            <div class="chart-loading-overlay" id="chartLoader">
+              <div class="loader-ring"></div>
+              <span>Loading chart…</span>
+            </div>
+          </div>
+          <details class="embed-fallback-details">
+            <summary>Try embedded widget (usually blank outside Trading Economics)</summary>
+            <p class="embed-fallback-note">
+              Browsers respect Trading Economics’ frame policy, so this preview may not render on
+              localhost or your domain.
+            </p>
+            <div class="chart-wrap chart-wrap-iframe">
+              <iframe
+                title="Trading Economics Cocoa embed"
+                src="https://d3fy651gv2fhd3.cloudfront.net/embed/?s=ccfd&max=1y&type=other"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </details>
+        </div>
+
+        <div class="card span-6">
+          <h2>Top producers (market share)</h2>
+          <div class="producers">
+            <div class="producer-row">
+              <span>Ivory Coast</span>
+              <div class="producer-bar"><span style="width: 42%"></span></div>
+              <span>~42%</span>
+            </div>
+            <div class="producer-row">
+              <span>Ghana</span>
+              <div class="producer-bar"><span style="width: 22%"></span></div>
+              <span>~22%</span>
+            </div>
+            <div class="producer-row">
+              <span>Indonesia</span>
+              <div class="producer-bar"><span style="width: 12%"></span></div>
+              <span>~12%</span>
+            </div>
+            <div class="producer-row">
+              <span>Nigeria</span>
+              <div class="producer-bar"><span style="width: 8%"></span></div>
+              <span>~8%</span>
+            </div>
+            <div class="producer-row">
+              <span>Cameroon</span>
+              <div class="producer-bar"><span style="width: 6%"></span></div>
+              <span>~6%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card span-12">
+          <h2>Market news ticker</h2>
+          <div class="ticker-wrap" aria-live="polite">
+            <div class="ticker" id="ticker-inner"></div>
+          </div>
+        </div>
+
+        <div class="card span-6">
+          <h2>Trading hours</h2>
+          <table class="hours-table">
+            <thead>
+              <tr>
+                <th>Market</th>
+                <th>Hours (approx.)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ICE London</td>
+                <td>09:30–18:00 GMT (screen hours vary by contract)</td>
+              </tr>
+              <tr>
+                <td>NYMEX / US</td>
+                <td>Sunday–Friday, CME Globex nearly 24h with breaks</td>
+              </tr>
+              <tr>
+                <td>Lagos (OTC / local)</td>
+                <td>08:00–17:00 WAT (business days)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-6">
+          <h2>Price forecasts</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0 0 0.75rem">
+            End-of-quarter and 12-month figures refresh with the live scrape when Trading
+            Economics publishes model updates.
+          </p>
+          <div class="meta-row">
+            <div class="meta-item">
+              <div class="label">End of quarter (model)</div>
+              <div class="value" id="meta-fq-copy">See live panel</div>
+            </div>
+            <div class="meta-item">
+              <div class="label">12 months</div>
+              <div class="value" id="meta-12m-copy">See live panel</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer (loaded globally) -->
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+      // Hide page loader once everything is ready
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('pageLoader');
+        if (loader) loader.classList.add('hidden');
+      });
+      (function syncForecastCopy() {
+        const fq = document.getElementById("meta-fq");
+        const m12 = document.getElementById("meta-12m");
+        const fqc = document.getElementById("meta-fq-copy");
+        const m12c = document.getElementById("meta-12m-copy");
+        const obs = new MutationObserver(() => {
+          if (fqc && fq) fqc.textContent = fq.textContent;
+          if (m12c && m12) m12c.textContent = m12.textContent;
+        });
+        if (fq) obs.observe(fq, { childList: true, characterData: true, subtree: true });
+        if (m12) obs.observe(m12, { childList: true, characterData: true, subtree: true });
+      })();
+    </script>
+  </body>
+</html>

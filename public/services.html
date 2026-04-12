@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | OGBO AND SONS NIGERIA LIMITED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/navbar.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cocoa-brown: #3D2314;
+      --cocoa-dark: #1A0F0A;
+      --cocoa-light: #5C3D2E;
+      --gold: #D4A84B;
+      --gold-light: #E8C068;
+      --cream: #F5F0E8;
+      --white: #FFFFFF;
+      --gray: #8B7355;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cocoa-dark);
+      color: var(--cream);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--cocoa-dark) 0%, var(--cocoa-brown) 100%);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--cocoa-dark);
+      font-size: 1.2rem;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 75, 0.7); }
+      50% { box-shadow: 0 0 20px 5px rgba(212, 168, 75, 0.4); }
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .logo-text span { display: block; font-size: 0.7rem; color: var(--cream); font-family: 'Inter', sans-serif; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .nav-links a:hover { color: var(--gold); background: rgba(212, 168, 75, 0.1); }
+
+    body { padding-top: 80px; }
+
+    .page-header {
+      margin-top: 80px;
+      background: linear-gradient(135deg, var(--cocoa-brown) 0%, var(--cocoa-dark) 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    .page-header h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .page-header p { color: var(--cream); opacity: 0.9; }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .intro-card {
+      background: linear-gradient(145deg, var(--cocoa-brown), var(--cocoa-dark));
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .intro-card p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--cream);
+      opacity: 0.9;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, var(--cocoa-brown), var(--cocoa-dark));
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(212, 168, 75, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light));
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      border-color: var(--gold);
+    }
+    .service-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(212, 168, 75, 0.15);
+      font-family: 'Playfair Display', serif;
+    }
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      color: var(--gold);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+    .service-card p {
+      color: var(--cream);
+      opacity: 0.9;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .service-features {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(212, 168, 75, 0.2);
+    }
+    .service-features li {
+      color: var(--cream);
+      font-size: 0.9rem;
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      list-style: none;
+    }
+    .service-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, var(--cocoa-brown), var(--cocoa-dark));
+      border-radius: 12px;
+      padding: 3rem;
+      border: 2px solid var(--gold);
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta-section h2 {
+      color: var(--gold);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: var(--cream);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    .cta-btn.primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--cocoa-dark);
+    }
+    .cta-btn.secondary {
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .footer {
+      background: var(--cocoa-dark);
+      border-top: 2px solid var(--gold);
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    .footer-section h4 { color: var(--gold); margin-bottom: 1rem; font-family: 'Playfair Display', serif; }
+    .footer-section p, .footer-section a { color: var(--cream); font-size: 0.9rem; text-decoration: none; }
+    .footer-section a:hover { color: var(--gold); }
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(212, 168, 75, 0.3);
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--cocoa-dark);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0;
+        transform: translateY(-150%);
+        transition: transform 0.3s;
+        border-bottom: 2px solid var(--gold);
+      }
+      .nav-links.active { transform: translateY(0); }
+      .nav-links a { padding: 1rem; border-bottom: 1px solid rgba(212, 168, 75, 0.2); }
+      .page-header h1 { font-size: 1.8rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <section class="page-header">
+    <h1>Our Services</h1>
+    <p>Comprehensive Cocoa Trading & Export Solutions | Based in Umuahia, Abia State</p>
+  </section>
+
+  <main class="main-content">
+    <div class="intro-card">
+      <p>At OGBO AND SONS NIGERIA LIMITED, we provide end-to-end cocoa trading services. From sourcing premium Grade 1 beans from local farmers to processing, certifying, and exporting to global markets - we handle every step with professionalism and care.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-number">01</span>
+        <div class="service-icon">🫘</div>
+        <h3>Raw Cocoa Bean Supply</h3>
+        <p>We source and supply premium Grade 1 cocoa beans directly from farmers in the cocoa belt regions. Our beans are carefully selected and processed to meet international quality standards for chocolate manufacturers worldwide.</p>
+        <ul class="service-features">
+          <li>Grade 1 export-ready beans</li>
+          <li>Direct from Abia State farms</li>
+          <li>Quality certified by inspection agencies</li>
+          <li>Bulk supply capabilities</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">02</span>
+        <div class="service-icon">🏭</div>
+        <h3>Processing & Export</h3>
+        <p>Our state-of-the-art processing facilities in Calabar ensure your cocoa is cleaned, sorted, fermented, dried, and packaged to perfection. We handle all export documentation and logistics.</p>
+        <ul class="service-features">
+          <li>ISO certified processing facilities</li>
+          <li>Professional fermentation & drying</li>
+          <li>Expert export documentation</li>
+          <li>Full logistics coordination</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">03</span>
+        <div class="service-icon">🤝</div>
+        <h3>Farmer Support Programs</h3>
+        <p>We believe in empowering the farming communities that make our business possible. Through fair trade financing, agricultural training, and community development initiatives, we support thousands of local farmers.</p>
+        <ul class="service-features">
+          <li>Fair trade financing programs</li>
+          <li>Agricultural best practices training</li>
+          <li>Fair compensation guarantee</li>
+          <li>Community development initiatives</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">04</span>
+        <div class="service-icon">📊</div>
+        <h3>Market Intelligence</h3>
+        <p>Stay ahead of market trends with our comprehensive market intelligence services. We provide live pricing, detailed forecasts, and strategic insights to help you make informed trading decisions.</p>
+        <ul class="service-features">
+          <li>Live cocoa price feeds</li>
+          <li>End-of-quarter forecasts</li>
+          <li>12-month price predictions</li>
+          <li>Global market analysis reports</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">05</span>
+        <div class="service-icon">📜</div>
+        <h3>Certification Services</h3>
+        <p>We provide comprehensive certification services to ensure your cocoa meets international standards and market requirements. Our certifications are recognized by major markets worldwide.</p>
+        <ul class="service-features">
+          <li>UTZ Certified</li>
+          <li>Rainforest Alliance</li>
+          <li>Organic certification</li>
+          <li>Fair Trade certification</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">06</span>
+        <div class="service-icon">🏬</div>
+        <h3>Storage & Warehousing</h3>
+        <p>Our climate-controlled storage facilities in Umuahia and Calabar ensure your cocoa maintains optimal quality from purchase through export. Secure, modern warehousing with inventory management.</p>
+        <ul class="service-features">
+          <li>Climate-controlled facilities</li>
+          <li>Secure storage in Umuahia & Calabar</li>
+          <li>Inventory management system</li>
+          <li>Quality preservation guarantee</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 2rem; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(201,162,39,0.2)">
+      <img src="/images/cocoa-warehouse.png" alt="Climate-controlled cocoa storage" width="1200" height="400" style="width:100%;max-height:320px;object-fit:cover" />
+    </div>
+    <div class="cta-section">
+      <h2>Ready to Partner With Us?</h2>
+      <p>Whether you're a chocolate manufacturer, cocoa trader, or food company seeking premium Nigerian cocoa, we're here to serve you. Contact our team to discuss your requirements.</p>
+      <div class="cta-buttons">
+        <a href="/contact" class="cta-btn primary">Contact Us Today</a>
+        <a href="tel:+2348012345678" class="cta-btn secondary">Call +234 80 1234 5678</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>OGBO AND SONS NIGERIA LIMITED</h4>
+        <p>RC 289933</p>
+        <p>Private Unlimited Company</p>
+        <p>Incorporated: 04 March 1996</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>📞 Main: <a href="tel:+2348012345678">+234 80 1234 5678</a></p>
+        <p>📱 WhatsApp: <a href="tel:+2348098765432">+234 80 9876 5432</a></p>
+        <p>✉️ <a href="mailto:info@ogbosonng.com">info@ogbosonng.com</a></p>
+        <p>✉️ <a href="mailto:exports@ogbosonng.com">exports@ogbosonng.com</a></p>
+      </div>
+      <div class="footer-section">
+        <h4>Office Location</h4>
+        <p>No. 32, Igbere Street</p>
+        <p>Umuahia, Abia State</p>
+        <p>Nigeria</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <p><a href="/">Dashboard</a></p>
+        <p><a href="/about">About Us</a></p>
+        <p><a href="/services">Services</a></p>
+        <p><a href="/contact">Contact</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 OGBO AND SONS NIGERIA LIMITED. All Rights Reserved. | RC 289933</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
+  <script src="/js/components.js"></script>
+</body>
+</html>
