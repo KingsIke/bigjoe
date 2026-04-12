@@ -10,6 +10,20 @@ const TE_COCOA = "https://tradingeconomics.com/commodity/cocoa";
 let cache = { payload: null, at: 0 };
 const CACHE_MS = parseInt(process.env.COCOA_CACHE_MS || "45000", 10);
 
+// Pre-fetch data on server startup
+async function initializeChartData() {
+  console.log("Initializing chart data on server startup...");
+  try {
+    // Trigger the first fetch to warm up the cache
+    const payload = await scrapeCocoa();
+    cache = { payload, at: Date.now() };
+    console.log("✓ Chart data pre-loaded successfully");
+  } catch (err) {
+    console.warn("⚠ Pre-load failed, will use fallback:", err.message);
+    cache = { payload: fallbackPayload(err.message), at: Date.now() };
+  }
+}
+
 function syntheticSeries(months = 14) {
   const now = Date.now();
   const day = 86400000;
@@ -286,6 +300,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`OGBO Cocoa app at http://localhost:${PORT}`);
-});
+// Start server and pre-load chart data
+(async () => {
+  await initializeChartData();
+  app.listen(PORT, () => {
+    console.log(`OGBO Cocoa app at http://localhost:${PORT}`);
+  });
+})();
