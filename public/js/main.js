@@ -1,18 +1,18 @@
-// Pre-fetch chart data on DOM ready - before full app initialization
-async function initChartPreload() {
-  if (document.body.dataset.page !== "dashboard") return;
-  try {
-    const r = await fetch("/api/cocoa?t=" + Date.now());
-    const d = await r.json();
-    // Store for later use by main app
-    window.__PRELOADED_COCOA_DATA__ = d;
-  } catch (e) {
-    console.warn("Preload failed:", e);
-  }
-}
+// // Pre-fetch chart data on DOM ready - before full app initialization
+// async function initChartPreload() {
+//   if (document.body.dataset.page !== "dashboard") return;
+//   try {
+//     const r = await fetch("/api/cocoa?t=" + Date.now());
+//     const d = await r.json();
+//     // Store for later use by main app
+//     window.__PRELOADED_COCOA_DATA__ = d;
+//   } catch (e) {
+//     console.warn("Preload failed:", e);
+//   }
+// }
 
 // Start preload immediately
-initChartPreload();
+// initChartPreload();
 
 (function () {
   const navToggle = document.querySelector(".nav-toggle");
@@ -203,14 +203,14 @@ initChartPreload();
   async function refreshCocoa() {
     try {
       // Use preloaded data if available, otherwise fetch
-      let d;
-      if (window.__PRELOADED_COCOA_DATA__) {
-        d = window.__PRELOADED_COCOA_DATA__;
-        delete window.__PRELOADED_COCOA_DATA__; // Use once
-      } else {
+      // let d;
+      // if (window.__PRELOADED_COCOA_DATA__) {
+      //   d = window.__PRELOADED_COCOA_DATA__;
+      //   delete window.__PRELOADED_COCOA_DATA__; // Use once
+      // } else {
         const r = await fetch("/api/cocoa?t=" + Date.now());
-        d = await r.json();
-      }
+       const  d = await r.json();
+      // }
 
       hideSkeletons();
       if (els.price) els.price.textContent = fmtMoney(d.price);

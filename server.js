@@ -11,19 +11,19 @@ let cache = { payload: null, at: 0 };
 // const CACHE_MS = parseInt(process.env.COCOA_CACHE_MS || "45000", 10);
 const CACHE_MS = 120000; // 2 minutes
 
-// Pre-fetch data on server startup
-async function initializeChartData() {
-  console.log("Initializing chart data on server startup...");
-  try {
-    // Trigger the first fetch to warm up the cache
-    const payload = await scrapeCocoa();
-    cache = { payload, at: Date.now() };
-    console.log("✓ Chart data pre-loaded successfully");
-  } catch (err) {
-    console.warn("⚠ Pre-load failed, will use fallback:", err.message);
-    cache = { payload: fallbackPayload(err.message), at: Date.now() };
-  }
-}
+// // Pre-fetch data on server startup
+// async function initializeChartData() {
+//   console.log("Initializing chart data on server startup...");
+//   try {
+//     // Trigger the first fetch to warm up the cache
+//     const payload = await scrapeCocoa();
+//     cache = { payload, at: Date.now() };
+//     console.log("✓ Chart data pre-loaded successfully");
+//   } catch (err) {
+//     console.warn("⚠ Pre-load failed, will use fallback:", err.message);
+//     cache = { payload: fallbackPayload(err.message), at: Date.now() };
+//   }
+// }
 
 function syntheticSeries(months = 14) {
   const now = Date.now();
@@ -70,6 +70,7 @@ function fallbackPayload(errMsg) {
 async function scrapeTradingEconomics() {
  const browser = await puppeteer.launch({
   headless: "new",
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
   args: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
@@ -317,9 +318,9 @@ app.get("/", (req, res) => {
 });
 
 // Start server and pre-load chart data
-(async () => {
-  await initializeChartData();
+// (async () => {
+//   await initializeChartData();
   app.listen(PORT, () => {
     console.log(`OGBO Cocoa app at http://localhost:${PORT}`);
   });
-})();
+// })();
