@@ -5,17 +5,13 @@
   "description": "OGBO AND SONS NIGERIA LIMITED — cocoa trading company site with Trading Economics scrape",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "npx puppeteer browsers install chrome",
-    "scrape": "node scripts/scrape-once.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "@sparticuz/chromium": "^147.0.0",
     "express": "^4.21.2",
-    "puppeteer": "^24.15.0",
-    "puppeteer-core": "^24.40.0"
+    "puppeteer": "^24.40.0"
   }
 }

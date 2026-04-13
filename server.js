@@ -78,7 +78,9 @@ async function scrapeTradingEconomics() {
     "--disable-gpu",
     "--no-first-run",
     "--no-zygote",
-    "--single-process"
+    "--single-process",
+    "--disable-accelerated-2d-canvas",
+
   ],
 });
   try {
