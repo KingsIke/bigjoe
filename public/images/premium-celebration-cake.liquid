@@ -1,0 +1,974 @@
+{% comment %}
+  Premium Celebration Cake Template
+  Features: 6", 8" (+$35), 10" (+$70)
+  Flavors: Choose 2 (Signature Vanilla, Red Velvet, Chocolate, Strawberry, Oreos & Cookies)
+  Required: Custom Name/Age Topper ($10)
+  Add-ons: Faux Ball ($5), Fondant Crown/Butterflies ($15)
+  FIX: Form submit listener moved inside DOMContentLoaded; uses form 'submit' event correctly.
+{% endcomment %}
+
+<style>
+/* Premium Celebration Cake Styles */
+.premium-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 50%, #fff0f0 100%);
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.premium-container::before {
+  content: "✨";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.premium-container::after {
+  content: "✨";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.product-main-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Premium Badge */
+.premium-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: #2d1810;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 800;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+  letter-spacing: 1px;
+}
+
+.premium-badge::before {
+  content: "⭐";
+  margin-right: 8px;
+}
+
+/* Product Images */
+.product-images-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.main-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #fce4d6, #ffe8e0);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  border: 3px solid #fff;
+}
+
+.main-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.main-product-image:hover {
+  transform: scale(1.02);
+}
+
+.thumbnail-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.thumbnail-wrapper {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+  background: white;
+}
+
+.thumbnail-wrapper:hover {
+  transform: translateY(-3px);
+  border-color: #d4af37;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbnail-image.active {
+  border: 2px solid #d4af37;
+}
+
+/* Product Info */
+.product-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #2d1810, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.product-price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #d4af37;
+  text-shadow: 0 2px 5px rgba(212,175,55,0.2);
+}
+
+.price-breakdown {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.6;
+  padding: 12px;
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid #d4af37;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.product-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin: 10px 0;
+}
+
+.delivery-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.delivery-icon {
+  font-size: 14px;
+  color: #d4af37;
+  font-weight: 600;
+}
+
+/* Form Styles */
+#product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d1810;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 14px 16px;
+  border: 2px solid #f0e0d8;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s;
+  background: white;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Size Options */
+.size-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.size-options input[type="radio"] {
+  display: none;
+}
+
+.size-button {
+  padding: 14px 28px;
+  border: 2px solid #f0e0d8;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 15px;
+  text-align: center;
+  background: white;
+  font-weight: 700;
+  color: #2d1810;
+}
+
+.size-options input[type="radio"]:checked + .size-button {
+  border-color: #d4af37;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: #2d1810;
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+}
+
+.size-button:hover {
+  transform: translateY(-2px);
+  border-color: #d4af37;
+}
+
+/* Flavor Options */
+.flavor-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.flavor-options input[type="checkbox"] {
+  display: none;
+}
+
+.flavor-button {
+  padding: 14px 20px;
+  border: 2px solid #f0e0d8;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+  text-align: center;
+  background: white;
+  font-weight: 600;
+  color: #2d1810;
+  display: block;
+}
+
+.flavor-options input[type="checkbox"]:checked + .flavor-button {
+  border-color: #d4af37;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: #2d1810;
+  transform: scale(1.02);
+}
+
+.flavor-button:hover {
+  transform: translateY(-2px);
+  border-color: #d4af37;
+}
+
+.flavor-limit-warning {
+  font-size: 13px;
+  color: #d4af37;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: fit-content;
+  background: white;
+  padding: 5px;
+  border-radius: 60px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.quantity-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: #f5e6df;
+  cursor: pointer;
+  font-size: 22px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  color: #d4af37;
+  font-weight: bold;
+}
+
+.quantity-btn:hover {
+  background: #d4af37;
+  color: white;
+  transform: scale(1.05);
+}
+
+.quantity-input {
+  width: 70px;
+  height: 48px;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  background: transparent;
+  color: #2d1810;
+}
+
+/* Topper Options */
+.topper-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topper-options input[type="radio"] {
+  display: none;
+}
+
+.topper-label {
+  padding: 14px 20px;
+  border: 2px solid #f0e0d8;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+  background: white;
+  color: #2d1810;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topper-options input[type="radio"]:checked + .topper-label {
+  border-color: #d4af37;
+  background: linear-gradient(135deg, #fff8f0, #fff);
+  box-shadow: 0 3px 10px rgba(212,175,55,0.2);
+}
+
+.topper-label:hover {
+  transform: translateX(5px);
+  border-color: #d4af37;
+}
+
+/* Add-on Checkboxes */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 14px 18px;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #f0e0d8;
+  transition: all 0.3s;
+  color: #2d1810;
+  font-weight: 500;
+}
+
+.checkbox-label:hover {
+  border-color: #d4af37;
+  transform: translateX(5px);
+  background: #fffaf5;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #d4af37;
+}
+
+/* Buttons */
+.add-to-cart-btn {
+  padding: 18px 32px;
+  background: linear-gradient(135deg, #2d1810, #4a2a1a);
+  color: #ffd700;
+  border: none;
+  border-radius: 60px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 5px 20px rgba(45,24,16,0.3);
+  margin-top: 10px;
+  width: 100%;
+}
+
+.add-to-cart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(45,24,16,0.4);
+  background: linear-gradient(135deg, #4a2a1a, #2d1810);
+}
+
+.add-to-cart-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.shop-pay-btn {
+  padding: 16px 32px;
+  background: #5a31f4;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.shop-pay-btn:hover {
+  background: #4a28d4;
+  transform: translateY(-2px);
+}
+
+/* Required Star */
+.required-star {
+  color: #e74c3c;
+  font-size: 16px;
+  margin-left: 3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-main-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .product-title {
+    font-size: 28px;
+  }
+
+  .flavor-options {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-container {
+    padding: 20px 15px;
+  }
+
+  .size-button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+</style>
+
+<div class="premium-container">
+  <div class="product-main-section">
+
+    <!-- Product Images -->
+    <div class="product-images-section">
+      <div class="premium-badge">PREMIUM CELEBRATION</div>
+      <div class="main-image-container">
+        <img
+          id="main-product-image"
+          src="{{ product.featured_image | img_url: '800x800' }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          class="main-product-image"
+          width="800"
+          height="800"
+        />
+      </div>
+
+      <div class="thumbnail-container">
+        {% for image in product.images limit: 4 %}
+          <div class="thumbnail-wrapper">
+            <img
+              src="{{ image | img_url: '150x150' }}"
+              alt="{{ image.alt | escape }}"
+              class="thumbnail-image {% if forloop.first %}active{% endif %}"
+              data-main-image="{{ image | img_url: '800x800' }}"
+              onclick="changeMainImage(this)"
+              width="150"
+              height="150"
+            />
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info-section">
+      <h1 class="product-title">{{ product.title }}</h1>
+      <div class="product-price" id="product-price-display">{{ product.price | money }}</div>
+      <div class="price-breakdown" id="price-breakdown" style="display: none;"></div>
+
+      {% if product.description != blank %}
+        <div class="product-description">{{ product.description }}</div>
+      {% endif %}
+
+      <div class="delivery-options">
+        <span class="delivery-icon">⭐ Premium Quality</span>
+        <span class="delivery-icon">🎂 Custom Made</span>
+        <span class="delivery-icon">✨ Bespoke Design</span>
+      </div>
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data" id="product-form">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <!-- Size Selection -->
+        <div class="form-group">
+          <label class="form-label">🎂 Cake Size:</label>
+          <div class="size-options">
+            <input type="radio" name="properties[Size]" value="6-inch" id="size-6" data-price="0" checked onchange="updatePrice()">
+            <label for="size-6" class="size-button">🎂 6-inch</label>
+
+            <input type="radio" name="properties[Size]" value="8-inch" id="size-8" data-price="35" onchange="updatePrice()">
+            <label for="size-8" class="size-button">🎂 8-inch +$35</label>
+
+            <input type="radio" name="properties[Size]" value="10-inch" id="size-10" data-price="70" onchange="updatePrice()">
+            <label for="size-10" class="size-button">🎂 10-inch +$70</label>
+          </div>
+        </div>
+
+        <!-- Flavor Selection - Choose 2 -->
+        <div class="form-group">
+          <label class="form-label">🍰 Pick Your Flavors (Choose 2):<span class="required-star">*</span></label>
+          <div class="flavor-options">
+            <input type="checkbox" name="properties[Flavor]" value="Signature Vanilla" id="flavor-vanilla">
+            <label for="flavor-vanilla" class="flavor-button">🍦 Signature Vanilla</label>
+
+            <input type="checkbox" name="properties[Flavor]" value="Red Velvet" id="flavor-redvelvet">
+            <label for="flavor-redvelvet" class="flavor-button">❤️ Red Velvet</label>
+
+            <input type="checkbox" name="properties[Flavor]" value="Chocolate" id="flavor-chocolate">
+            <label for="flavor-chocolate" class="flavor-button">🍫 Chocolate</label>
+
+            <input type="checkbox" name="properties[Flavor]" value="Strawberry" id="flavor-strawberry">
+            <label for="flavor-strawberry" class="flavor-button">🍓 Strawberry</label>
+
+            <input type="checkbox" name="properties[Flavor]" value="Oreos & Cookies" id="flavor-oreo">
+            <label for="flavor-oreo" class="flavor-button">🍪 Oreos & Cookies</label>
+          </div>
+          <div class="flavor-limit-warning" id="flavor-warning">Please select exactly 2 flavors.</div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+          <label class="form-label">🔢 Quantity:</label>
+          <div class="quantity-selector">
+            <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+            <input type="number" name="quantity" id="quantity" value="1" min="1" class="quantity-input" onchange="updatePrice()">
+            <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+          </div>
+        </div>
+
+        <!-- Custom Name/Age Topper - Required -->
+        <div class="form-group">
+          <label class="form-label">✨ Custom Name/Age Topper<span class="required-star">*</span></label>
+          <div class="topper-options">
+            <input type="radio" name="properties[Topper Type]" value="Custom Name/Age" id="topper-custom" data-price="10" checked onchange="updatePrice()">
+            <label for="topper-custom" class="topper-label">
+              <span>✨ Custom Name/Age Topper (+$10.00)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Topper Text - Required -->
+        <div class="form-group">
+          <label for="custom-topper-text" class="form-label">
+            📝 Name/Age for Topper<span class="required-star">*</span>
+          </label>
+          <input
+            type="text"
+            name="properties[Topper Text]"
+            id="custom-topper-text"
+            placeholder="e.g., Happy 30th Sarah, Oliver turns 1, Emily 25"
+            class="form-input"
+          />
+          <small style="color: #888; font-size: 12px;">Example: "Happy 30th Sarah" or "Oliver turns 1"</small>
+        </div>
+
+        <!-- Optional Add-ons -->
+        <div class="form-group">
+          <label class="form-label">🎁 Premium Add-ons:</label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="properties[Faux Ball]" value="Yes" id="faux-ball" data-price="5" onchange="updatePrice()">
+            <span>⚽ Faux Ball Decoration (+$5.00)</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="properties[Fondant Crown]" value="Yes" id="fondant-crown" data-price="15" onchange="updatePrice()">
+            <span>👑 Fondant Crown/Butterflies (+$15.00)</span>
+          </label>
+        </div>
+
+        <!-- Event Date -->
+        <div class="form-group">
+          <label for="event-date" class="form-label">📅 Event Date:<span class="required-star">*</span></label>
+          <input
+            type="datetime-local"
+            name="properties[Event Date]"
+            id="event-date"
+            required
+            class="form-input"
+            onchange="updatePickupMin()"
+          />
+        </div>
+
+        <!-- Pickup Date -->
+        <div class="form-group">
+          <label for="pickup-date" class="form-label">🚗 Pickup Date (must be after Event Date):<span class="required-star">*</span></label>
+          <input
+            type="datetime-local"
+            name="properties[Pickup Date]"
+            id="pickup-date"
+            required
+            class="form-input"
+          />
+        </div>
+
+        <!-- Preferred Colors -->
+        <div class="form-group">
+          <label for="preferred-colors" class="form-label">🎨 Preferred Color Scheme:</label>
+          <input
+            type="text"
+            name="properties[Preferred Colors]"
+            id="preferred-colors"
+            placeholder="e.g., Gold & White, Pink & Rose Gold, Blue & Silver"
+            class="form-input"
+          />
+        </div>
+
+        <!-- Special Instructions -->
+        <div class="form-group">
+          <label for="special-instructions" class="form-label">💬 Special Requests / Dietary Notes:</label>
+          <textarea
+            name="properties[Special Instructions]"
+            id="special-instructions"
+            class="form-textarea form-input"
+            placeholder="Any allergies, specific design requests, or additional notes..."
+          ></textarea>
+        </div>
+
+        <!-- Add to Cart -->
+        <button type="submit" class="add-to-cart-btn" id="add-to-cart">
+          ✨ ADD TO CART — PREMIUM CAKE ✨
+        </button>
+
+        <button type="button" class="shop-pay-btn" id="shop-pay-btn">
+          ⚡ Buy with Shop Pay
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Base price from Shopify variant
+  let basePrice = {{ product.selected_or_first_available_variant.price | divided_by: 100.0 }};
+  const currencySymbol = '{{ cart.currency.symbol }}' || '$';
+
+  /* ---------- Image Gallery ---------- */
+  function changeMainImage(thumbnail) {
+    const mainImage = document.getElementById('main-product-image');
+    mainImage.src = thumbnail.getAttribute('data-main-image');
+    document.querySelectorAll('.thumbnail-image').forEach(img => img.classList.remove('active'));
+    thumbnail.classList.add('active');
+  }
+
+  /* ---------- Quantity ---------- */
+  function increaseQuantity() {
+    const qty = document.getElementById('quantity');
+    qty.value = parseInt(qty.value) + 1;
+    updatePrice();
+  }
+
+  function decreaseQuantity() {
+    const qty = document.getElementById('quantity');
+    if (parseInt(qty.value) > 1) {
+      qty.value = parseInt(qty.value) - 1;
+      updatePrice();
+    }
+  }
+
+  /* ---------- Pickup Date Minimum ---------- */
+  function updatePickupMin() {
+    const eventDateInput = document.getElementById('event-date');
+    const pickupDateInput = document.getElementById('pickup-date');
+
+    if (eventDateInput.value) {
+      const eventDate = new Date(eventDateInput.value);
+      eventDate.setDate(eventDate.getDate() + 1);
+
+      const year  = eventDate.getFullYear();
+      const month = String(eventDate.getMonth() + 1).padStart(2, '0');
+      const day   = String(eventDate.getDate()).padStart(2, '0');
+      const hours = String(eventDate.getHours()).padStart(2, '0');
+      const mins  = String(eventDate.getMinutes()).padStart(2, '0');
+      const minDateTime = `${year}-${month}-${day}T${hours}:${mins}`;
+
+      pickupDateInput.min = minDateTime;
+      if (pickupDateInput.value && pickupDateInput.value < minDateTime) {
+        pickupDateInput.value = '';
+      }
+    } else {
+      pickupDateInput.min = '';
+    }
+  }
+
+  /* ---------- Flavor Warning ---------- */
+  function validateFlavors() {
+    const checked = document.querySelectorAll('input[name="properties[Flavor]"]:checked');
+    const warning = document.getElementById('flavor-warning');
+
+    if (checked.length === 0) {
+      warning.innerHTML = 'Please select exactly 2 flavors.';
+      warning.style.color = '#d4af37';
+    } else if (checked.length === 1) {
+      warning.innerHTML = '⚠️ Select 1 more flavor.';
+      warning.style.color = '#d4af37';
+    } else if (checked.length === 2) {
+      warning.innerHTML = '✓ 2 flavors selected!';
+      warning.style.color = '#27ae60';
+    } else {
+      warning.innerHTML = '⚠️ You can select only 2 flavors.';
+      warning.style.color = '#e74c3c';
+    }
+  }
+
+  /* ---------- Live Price Calculation ---------- */
+  function updatePrice() {
+    let totalPrice = basePrice;
+    const breakdown = [];
+    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+    // Size upgrade
+    const selectedSize = document.querySelector('input[name="properties[Size]"]:checked');
+    if (selectedSize) {
+      const sizePrice = parseFloat(selectedSize.getAttribute('data-price')) || 0;
+      if (sizePrice > 0) {
+        totalPrice += sizePrice;
+        breakdown.push(`Size upgrade (${selectedSize.value}): +${formatPrice(sizePrice)}`);
+      }
+    }
+
+    // Custom Topper ($10 — always required)
+    totalPrice += 10;
+    breakdown.push(`✨ Custom Name/Age Topper: +${formatPrice(10)}`);
+
+    // Faux Ball ($5)
+    const fauxBall = document.getElementById('faux-ball');
+    if (fauxBall && fauxBall.checked) {
+      totalPrice += 5;
+      breakdown.push(`⚽ Faux Ball: +${formatPrice(5)}`);
+    }
+
+    // Fondant Crown/Butterflies ($15)
+    const fondantCrown = document.getElementById('fondant-crown');
+    if (fondantCrown && fondantCrown.checked) {
+      totalPrice += 15;
+      breakdown.push(`👑 Fondant Crown/Butterflies: +${formatPrice(15)}`);
+    }
+
+    const subtotal   = totalPrice;
+    const finalTotal = subtotal * quantity;
+
+    const priceDisplay    = document.getElementById('product-price-display');
+    const breakdownDisplay = document.getElementById('price-breakdown');
+
+    priceDisplay.textContent = quantity > 1
+      ? formatPrice(finalTotal) + ` (${formatPrice(subtotal)} × ${quantity})`
+      : formatPrice(finalTotal);
+
+    if (breakdown.length > 0 || quantity > 1) {
+      let text = breakdown.join('<br>');
+      if (quantity > 1) {
+        text += (text ? '<br>' : '') + `Base cake: ${formatPrice(basePrice)} × ${quantity}`;
+      }
+      breakdownDisplay.innerHTML = text;
+      breakdownDisplay.style.display = 'block';
+    } else {
+      breakdownDisplay.style.display = 'none';
+    }
+  }
+
+  function formatPrice(price) {
+    return currencySymbol + price.toFixed(2);
+  }
+
+  /* ---------- Full Validation ---------- */
+  function validateRequiredFields() {
+    // Exactly 2 flavors
+    const selectedFlavors = document.querySelectorAll('input[name="properties[Flavor]"]:checked');
+    if (selectedFlavors.length !== 2) {
+      alert('⚠️ Please select exactly 2 flavors for your cake!');
+      return false;
+    }
+
+    // Topper text
+    const topperText = document.getElementById('custom-topper-text').value.trim();
+    if (!topperText) {
+      alert('⚠️ Please enter the Name/Age for your custom cake topper.\n\nExample: "Happy 30th Sarah" or "Oliver turns 1"');
+      document.getElementById('custom-topper-text').focus();
+      return false;
+    }
+
+    // Event date
+    const eventDateVal = document.getElementById('event-date').value;
+    if (!eventDateVal) {
+      alert('⚠️ Please select your event date!');
+      return false;
+    }
+
+    // Pickup date
+    const pickupDateVal = document.getElementById('pickup-date').value;
+    if (!pickupDateVal) {
+      alert('⚠️ Please select a pickup date!');
+      return false;
+    }
+
+    // Pickup must be at least 1 day after event
+    const eventDate = new Date(eventDateVal);
+    const pickupDate = new Date(pickupDateVal);
+    const minPickup = new Date(eventDate);
+    minPickup.setDate(minPickup.getDate() + 1);
+
+    if (pickupDate < minPickup) {
+      alert('⚠️ Pickup date must be at least 1 day after the event date!');
+      return false;
+    }
+
+    return true;
+  }
+
+  /* ============================================================
+     DOMContentLoaded — all listeners attached here so elements
+     are guaranteed to exist. This is what was missing before.
+     ============================================================ */
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // Default event date to tomorrow at noon
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const year  = tomorrow.getFullYear();
+    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const day   = String(tomorrow.getDate()).padStart(2, '0');
+    document.getElementById('event-date').value = `${year}-${month}-${day}T12:00`;
+
+    updatePrice();
+    updatePickupMin();
+    validateFlavors();
+
+    // Flavor checkboxes — limit to 2
+    document.querySelectorAll('input[name="properties[Flavor]"]').forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        const checked = document.querySelectorAll('input[name="properties[Flavor]"]:checked');
+        if (checked.length > 2) {
+          this.checked = false;
+          alert('Please select only 2 flavors for your cake!');
+        }
+        validateFlavors();
+        updatePrice();
+      });
+    });
+
+    /* ----------------------------------------------------------
+       FORM SUBMIT — the fix: single 'submit' listener on the
+       form itself, inside DOMContentLoaded. Matches the working
+       "Little Princess" pattern exactly.
+       ---------------------------------------------------------- */
+    document.getElementById('product-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!validateRequiredFields()) return;
+
+      const formData = new FormData(this);
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Network response was not ok');
+        return r.json();
+      })
+      .then(function (data) {
+        console.log('Added to cart:', data);
+        alert('✨ Premium cake added to cart! ✨\n\nYour custom topper has been included.');
+        // Optional: open cart drawer or redirect
+        // window.location.href = '/cart';
+      })
+      .catch(function (err) {
+        console.error('Cart error:', err);
+        alert('Oops! Something went wrong adding to cart. Please try again.');
+      });
+    });
+
+    /* ----------------------------------------------------------
+       SHOP PAY BUTTON — validates then does a native form submit
+       so Shopify's Shop Pay flow can take over.
+       ---------------------------------------------------------- */
+    document.getElementById('shop-pay-btn').addEventListener('click', function () {
+      if (validateRequiredFields()) {
+        document.getElementById('product-form').submit();
+      }
+    });
+
+  }); // end DOMContentLoaded
+</script>
